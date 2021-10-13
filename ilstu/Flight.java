@@ -79,26 +79,20 @@ public class Flight {
         return flightNum;
     }
 
-    // /**
-    // * Reserve seats method
-    // *
-    // * @param reserveSeats -- the number of seats needed to be reserved
-    // *
-    // * @return true if the number of seats are available and reserved or false if
-    // * the number of seats are unavailable
-    // */
-    // public boolean reserveSeats(int reserveSeats) {
-    // if (getSeatsAvailable() < reserveSeats) {
-    // numSeatsReserved = reserveSeats;
-    // return true;
-    // }
-    // return false;
-    // }
-    public int reserveSeats(int reserveSeats) {
+    /**
+     * Reserve seats method
+     *
+     * @param reserveSeats -- the number of seats needed to be reserved
+     *
+     * @return true if the number of seats are available and reserved or false if
+     *         the number of seats are unavailable
+     */
+    public boolean reserveSeats(int reserveSeats) {
         if (getSeatsAvailable() >= reserveSeats) {
             numSeatsReserved = reserveSeats;
+            return true;
         }
-        return maxNumSeats - numSeatsReserved;
+        return false;
     }
 
     /**
