@@ -69,15 +69,43 @@ public class FlightReservation {
 
                 if (flight.equals(flight1.getFlightNum())) {
                     availSeats = flight1.getSeatsAvailable();
+                    System.out.print("How many seats would you like to reserve?  ");
+                    reserveSeats = scanner.nextInt();
+                    if (availSeats >= reserveSeats) {
+                        System.out.println("Reservation successful.");
+                    } else {
+                        System.out.println("Sorry, there are not enough seats available on that flight.");
+                    }
 
                 } else if (flight.equals(flight2.getFlightNum())) {
                     availSeats = flight2.getSeatsAvailable();
+                    System.out.print("How many seats would you like to reserve?  ");
+                    reserveSeats = scanner.nextInt();
+                    if (availSeats >= reserveSeats) {
+                        System.out.println("Reservation successful.");
+                    } else {
+                        System.out.println("Sorry, there are not enough seats available on that flight.");
+                    }
 
                 } else if (flight.equals(flight3.getFlightNum())) {
                     availSeats = flight3.getSeatsAvailable();
+                    System.out.print("How many seats would you like to reserve?  ");
+                    reserveSeats = scanner.nextInt();
+                    if (availSeats >= reserveSeats) {
+                        System.out.println("Reservation successful.");
+                    } else {
+                        System.out.println("Sorry, there are not enough seats available on that flight.");
+                    }
 
                 } else if (flight.equals(flight4.getFlightNum())) {
                     availSeats = flight4.getSeatsAvailable();
+                    System.out.print("How many seats would you like to reserve?  ");
+                    reserveSeats = scanner.nextInt();
+                    if (availSeats >= reserveSeats) {
+                        System.out.println("Reservation successful.");
+                    } else {
+                        System.out.println("Sorry, there are not enough seats available on that flight.");
+                    }
 
                 } else {
                     System.out.println("Sorry, no matching flight was found.");
