@@ -15,7 +15,7 @@ package ilstu;
 public class Flight {
     // instance variable
     private String flightNum; // A flight “number” that is two uppercase letters followed by 3 or 4 digits
-    private String airportCode; // The 3-letter airport code where the flight originates
+    private String originAirport; // The 3-letter airport code where the flight originates
     private String destAirport; // The 3-letter code for the destination airport
     private String aircraft; // An aircraft type that is a string of characters
     private int maxNumSeats; // The maximum number of seats available on this flight
@@ -31,22 +31,23 @@ public class Flight {
     /**
      * Constructor Method
      * 
-     * @param flightNum   -- the flight number
-     * @param airportCode -- the origin airport
-     * @param destAirport -- destination airport
-     * @param aircraft    -- aircraft type
+     * @param flightNum     -- the flight number
+     * @param originAirport -- the origin airport
+     * @param destAirport   -- destination airport
+     * @param aircraft      -- aircraft type
      * 
-     *                    function: constructor that receives the flight number,
-     *                    origin airport, destination airport, and aircraft type. It
-     *                    also sets the number of seats currently reserved to zero.
+     *                      function: constructor that receives the flight number,
+     *                      origin airport, destination airport, and aircraft type.
+     *                      It also sets the number of seats currently reserved to
+     *                      zero.
      */
-    public Flight(String flightNum, String airportCode, String destAirport, String aircraft) {
+    public Flight(String flightNum, String originAirport, String destAirport, String aircraft) {
         this.flightNum = flightNum;
-        this.airportCode = airportCode;
+        this.originAirport = originAirport;
         this.destAirport = destAirport;
         this.aircraft = aircraft;
         numSeatsReserved = 0;
-        calcMaximumSeats(aircraft);
+        calcMaximumSeats();
     }
 
     /**
@@ -57,7 +58,7 @@ public class Flight {
      */
     @Override
     public String toString() {
-        return flightNum + "\t" + airportCode + "\t" + destAirport + "\t" + getSeatsAvailable() + " seats available";
+        return flightNum + "\t" + originAirport + "\t" + destAirport + "\t" + getSeatsAvailable() + " seats available";
     }
 
     /**
@@ -89,7 +90,7 @@ public class Flight {
      */
     public boolean reserveSeats(int reserveSeats) {
         if (getSeatsAvailable() >= reserveSeats) {
-            numSeatsReserved = reserveSeats;
+            numSeatsReserved += reserveSeats;
             return true;
         }
         return false;
@@ -100,7 +101,7 @@ public class Flight {
      * 
      * @param aircraft
      */
-    private void calcMaximumSeats(String aircraft) {
+    private void calcMaximumSeats() {
         if (aircraft.equals(ac1)) {
             maxNumSeats = ac1Capacity;
         } else if (aircraft.equals(ac2)) {
