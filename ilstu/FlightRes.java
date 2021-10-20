@@ -59,7 +59,7 @@ public class FlightRes {
         }
     }
 
-    // TODO: needs to reask with a error statement
+    // TODO: needs to re-ask with a error statement
     private static boolean validateInput() {
         boolean validFlight = getFlightByFlightNum() != null;
         boolean validResSeats = userInputResSeats > 0;
@@ -90,30 +90,25 @@ public class FlightRes {
         log("M - make a flight reservation");
         log("Q - quit");
         System.out.print("Enter your choice: ");
-
-        // Scanner scanner = new Scanner(System.in);
         userInput = scanner.nextLine();
         userInput = userInput.toUpperCase();
-        // scanner.close();
     }
 
     private static void promptFlightNum() {
-        // Scanner scanner = new Scanner(System.in);
         System.out.print("On which flight?  ");
         userInputFlightNum = scanner.nextLine();
-        // scanner.close();
+
     }
 
     private static void promptReserveSeatNum() {
         System.out.print("How many seats would you like to reserve?  ");
-        // Scanner scanner = new Scanner(System.in);
         userInputResSeats = scanner.nextInt();
-        // scanner.close();
     }
 
     private static void quit() {
         log("You entered Q. Exiting program. Goodbye!");
         programRunning = false;
+        scanner.close();
     }
 
     private static void log(String msg) {
