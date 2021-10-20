@@ -11,6 +11,7 @@ public class FlightRes {
     private static boolean programRunning = true;
 
     public static void main(String[] args) {
+        log("Welcome to BloNo Reservations.");
         setupData();
         while (programRunning) {
             runProgram();
@@ -30,23 +31,23 @@ public class FlightRes {
         promptUser();
 
         switch (userInput) {
-            case "F":
-                listFlights();
-                break;
-            case "M":
-                boolean prompting = true;
-                while (prompting) {
-                    promptFlightNum();
-                    promptReserveSeatNum();
-                    prompting = !validateInput();
-                }
-                reserveSeats();
-                break;
-            case "Q":
-                quit();
-                break;
-            default:
-                log("You doof");
+        case "F":
+            listFlights();
+            break;
+        case "M":
+            boolean prompting = true;
+            while (prompting) {
+                promptFlightNum();
+                promptReserveSeatNum();
+                prompting = !validateInput();
+            }
+            reserveSeats();
+            break;
+        case "Q":
+            quit();
+            break;
+        default:
+            log(userInput + " is not valid input.");
         }
     }
 
@@ -58,6 +59,7 @@ public class FlightRes {
         }
     }
 
+    // TODO: needs to reask with a error statement
     private static boolean validateInput() {
         boolean validFlight = getFlightByFlightNum() != null;
         boolean validResSeats = userInputResSeats > 0;
