@@ -1,13 +1,25 @@
+/*
+ * Filename: FlightReservation.java
+ * Last modified on October 20, 2021 
+ * 
+ * Course: IT 168
+ */
 package ilstu;
 
 import java.util.Scanner;
 
-public class FlightRes {
+/**
+ * This is a program to display flight information and reserve seats on flights.
+ * 
+ * @author Stephanie Scott
+ */
+
+public class FlightReservation {
     private static Scanner scanner = new Scanner(System.in);
     private static Flight[] flights = new Flight[4];
     private static String userInput;
     private static String userInputFlightNum;
-    private static int userInputResSeats;
+    private static String userInputResSeats;
     private static boolean programRunning = true;
 
     public static void main(String[] args) {
@@ -35,13 +47,7 @@ public class FlightRes {
             listFlights();
             break;
         case "M":
-            boolean prompting = true;
-            while (prompting) {
-                promptFlightNum();
-                promptReserveSeatNum();
-                prompting = !validateInput();
-            }
-            reserveSeats();
+            reserveFlights();
             break;
         case "Q":
             quit();
@@ -59,16 +65,49 @@ public class FlightRes {
         }
     }
 
-    // TODO: needs to re-ask with a error statement
-    private static boolean validateInput() {
-        boolean validFlight = getFlightByFlightNum() != null;
-        boolean validResSeats = userInputResSeats > 0;
-        return validFlight && validResSeats;
+    private static void reserveFlights() {
+        boolean prompting = true;
+        while (prompting) {
+            prompting = promptFlightNum();
+        }
+
+        prompting = true;
+        while (prompting) {
+            prompting = promptReserveSeatNum();
+        }
+
+        reserveSeats();
+    }
+
+    private static boolean validateFlightNum() {
+        return getFlightByFlightNum() != null;
+    }
+
+    private static boolean validateSeats() {
+        boolean inputIsAnInt = true;
+        for (int i = 0; i < userInputResSeats.length(); i++) {
+            if ((int) userInputResSeats.charAt(i) >= 48 && (int) userInputResSeats.charAt(i) <= 57) {
+                continue;
+            }
+            inputIsAnInt = false;
+        }
+
+        boolean numCheck = false;
+        if (inputIsAnInt) {
+            numCheck = Integer.parseInt(userInputResSeats) > 0;
+            if (!numCheck) {
+                log("Error: number of seats must be greater than 0.");
+            }
+        } else {
+            log("Error: invalid input.");
+        }
+
+        return inputIsAnInt && numCheck;
     }
 
     private static void reserveSeats() {
         Flight flight = getFlightByFlightNum();
-        if (flight.reserveSeats(userInputResSeats)) {
+        if (flight.reserveSeats(Integer.parseInt(userInputResSeats))) {
             log("Reservation successful.");
         } else {
             log("Sorry, there are not enough seats available on that flight.");
@@ -94,15 +133,21 @@ public class FlightRes {
         userInput = userInput.toUpperCase();
     }
 
-    private static void promptFlightNum() {
+    private static boolean promptFlightNum() {
         System.out.print("On which flight?  ");
         userInputFlightNum = scanner.nextLine();
-
+        boolean invalid = !validateFlightNum();
+        if (invalid) {
+            log("\nError: no matching flight found.\n");
+        }
+        return invalid;
     }
 
-    private static void promptReserveSeatNum() {
+    private static boolean promptReserveSeatNum() {
         System.out.print("How many seats would you like to reserve?  ");
-        userInputResSeats = scanner.nextInt();
+        userInputResSeats = scanner.nextLine();
+
+        return !validateSeats();
     }
 
     private static void quit() {
