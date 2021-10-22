@@ -12,7 +12,7 @@ import java.util.Scanner;
  * 
  * @author Stephanie Scott
  */
-public class FlightReservation1 {
+public class FlightReservation {
     public static void main(String[] args) {
         Flight flight1 = new Flight("AA179", "ORD", "DFW", "A350");
         Flight flight2 = new Flight("AA3820", "BMI", "ORD", "ERJ-145");
