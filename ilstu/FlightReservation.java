@@ -1,9 +1,8 @@
 /*
- * Filename: FlightReservation.java
- * Last modified on October 20, 2021 
- * 
- * Course: IT 168
- */
+* Filename: FlightReservation.java Last modified on October 12, 2021
+* 
+* Course: IT 168 Class Section: 1
+*/
 package ilstu;
 
 import java.util.Scanner;
@@ -13,150 +12,104 @@ import java.util.Scanner;
  * 
  * @author Stephanie Scott
  */
-
-public class FlightReservation {
-    private static Scanner scanner = new Scanner(System.in);
-    private static Flight[] flights = new Flight[4];
-    private static String userInput;
-    private static String userInputFlightNum;
-    private static String userInputResSeats;
-    private static boolean programRunning = true;
-
+public class FlightReservation1 {
     public static void main(String[] args) {
-        log("Welcome to BloNo Reservations.");
-        setupData();
-        while (programRunning) {
-            runProgram();
-        }
-    }
+        Flight flight1 = new Flight("AA179", "ORD", "DFW", "A350");
+        Flight flight2 = new Flight("AA3820", "BMI", "ORD", "ERJ-145");
+        Flight flight3 = new Flight("DL2789", "BMI", "ATL", "ERJ-145");
+        Flight flight4 = new Flight("DL298", "ORD", "IAD", "767");
+        flight2.reserveSeats(48);
+        flight3.reserveSeats(40);
+        boolean choosingInput = true;
+        Scanner scanner = new Scanner(System.in);
+        while (choosingInput) {
+            System.out.print(
+                    "\nWelcome to BloNo Reservations.\nPlease choose one of the following:\nF – list all available flights\nM – make a flight reservation\nQ – quit\nEnter your choice: ");
+            String input = scanner.nextLine();
+            input = input.toUpperCase();
+            if (input.equals("Q")) {
+                choosingInput = false;
+                continue;
+            } else if (input.equals("F")) {
+                // list all available flights
+                if (flight1.getSeatsAvailable() > 0) {
+                    System.out.println(flight1);
+                }
+                if (flight2.getSeatsAvailable() > 0) {
+                    System.out.println(flight2);
+                }
+                if (flight3.getSeatsAvailable() > 0) {
+                    System.out.println(flight3);
+                }
+                if (flight4.getSeatsAvailable() > 0) {
+                    System.out.println(flight4);
+                }
+                if (flight1.getSeatsAvailable() == 0 && flight2.getSeatsAvailable() == 0
+                        && flight3.getSeatsAvailable() == 0 && flight4.getSeatsAvailable() == 0) {
+                    System.out.println("Sorry. There are no seats available on any flights.");
+                }
+            } else if (input.equals("M")) {
+                // make flight reservation
+                System.out.print("On which flight?  ");
+                String flight = scanner.nextLine();
+                int availSeats;
+                int reserveSeats;
 
-    private static void setupData() {
-        flights[0] = new Flight("AA179", "ORD", "DFW", "A350");
-        flights[1] = new Flight("AA3820", "BMI", "ORD", "ERJ-145");
-        flights[2] = new Flight("DL2789", "BMI", "ATL", "ERJ-145");
-        flights[3] = new Flight("DL298", "ORD", "IAD", "767");
-        flights[1].reserveSeats(48);
-        flights[2].reserveSeats(40);
-    }
+                if (flight.equals(flight1.getFlightNum())) {
+                    availSeats = flight1.getSeatsAvailable();
+                    System.out.print("How many seats would you like to reserve?  ");
+                    reserveSeats = scanner.nextInt();
+                    scanner.nextLine();
+                    if (availSeats >= reserveSeats) {
+                        System.out.println("Reservation successful.");
+                    } else {
+                        System.out.println("Sorry, there are not enough seats available on that flight.");
+                    }
 
-    private static void runProgram() {
-        promptUser();
+                } else if (flight.equals(flight2.getFlightNum())) {
+                    availSeats = flight2.getSeatsAvailable();
+                    System.out.print("How many seats would you like to reserve?  ");
+                    reserveSeats = scanner.nextInt();
+                    scanner.nextLine();
+                    if (availSeats >= reserveSeats) {
+                        System.out.println("Reservation successful.");
+                    } else {
+                        System.out.println("Sorry, there are not enough seats available on that flight.");
+                    }
 
-        switch (userInput) {
-        case "F":
-            listFlights();
-            break;
-        case "M":
-            reserveFlights();
-            break;
-        case "Q":
-            quit();
-            break;
-        default:
-            log(userInput + " is not valid input.");
-        }
-    }
+                } else if (flight.equals(flight3.getFlightNum())) {
+                    availSeats = flight3.getSeatsAvailable();
+                    System.out.print("How many seats would you like to reserve?  ");
+                    reserveSeats = scanner.nextInt();
+                    scanner.nextLine();
+                    if (availSeats >= reserveSeats) {
+                        System.out.println("Reservation successful.");
+                    } else {
+                        System.out.println("Sorry, there are not enough seats available on that flight.");
+                    }
 
-    private static void listFlights() {
-        for (Flight flight : flights) {
-            if (flight.getSeatsAvailable() > 0) {
-                System.out.println(flight);
-            }
-        }
-    }
+                } else if (flight.equals(flight4.getFlightNum())) {
+                    availSeats = flight4.getSeatsAvailable();
+                    System.out.print("How many seats would you like to reserve?  ");
+                    reserveSeats = scanner.nextInt();
+                    scanner.nextLine();
+                    if (availSeats >= reserveSeats) {
+                        System.out.println("Reservation successful.");
+                    } else {
+                        System.out.println("Sorry, there are not enough seats available on that flight.");
+                    }
 
-    private static void reserveFlights() {
-        boolean prompting = true;
-        while (prompting) {
-            prompting = promptFlightNum();
-        }
-
-        prompting = true;
-        while (prompting) {
-            prompting = promptReserveSeatNum();
-        }
-
-        reserveSeats();
-    }
-
-    private static boolean validateFlightNum() {
-        return getFlightByFlightNum() != null;
-    }
-
-    private static boolean validateSeats() {
-        boolean inputIsAnInt = true;
-        for (int i = 0; i < userInputResSeats.length(); i++) {
-            if ((int) userInputResSeats.charAt(i) >= 48 && (int) userInputResSeats.charAt(i) <= 57) {
+                } else {
+                    System.out.println("Sorry, no matching flight was found.");
+                    continue;
+                }
+            } else {
+                // invalid input reread.
+                System.out.println(input + " is invalid.");
                 continue;
             }
-            inputIsAnInt = false;
         }
-
-        boolean numCheck = false;
-        if (inputIsAnInt) {
-            numCheck = Integer.parseInt(userInputResSeats) > 0;
-            if (!numCheck) {
-                log("Error: number of seats must be greater than 0.");
-            }
-        } else {
-            log("Error: invalid input.");
-        }
-
-        return inputIsAnInt && numCheck;
-    }
-
-    private static void reserveSeats() {
-        Flight flight = getFlightByFlightNum();
-        if (flight.reserveSeats(Integer.parseInt(userInputResSeats))) {
-            log("Reservation successful.");
-        } else {
-            log("Sorry, there are not enough seats available on that flight.");
-        }
-    }
-
-    private static Flight getFlightByFlightNum() {
-        for (Flight flight : flights) {
-            if (flight.getFlightNum().equals(userInputFlightNum)) {
-                return flight;
-            }
-        }
-        return null;
-    }
-
-    private static void promptUser() {
-        log("\nPlease choose one of the following: ");
-        log("F - list all available flights");
-        log("M - make a flight reservation");
-        log("Q - quit");
-        System.out.print("Enter your choice: ");
-        userInput = scanner.nextLine();
-        userInput = userInput.toUpperCase();
-    }
-
-    private static boolean promptFlightNum() {
-        System.out.print("On which flight?  ");
-        userInputFlightNum = scanner.nextLine();
-        boolean invalid = !validateFlightNum();
-        if (invalid) {
-            log("\nError: no matching flight found.\n");
-        }
-        return invalid;
-    }
-
-    private static boolean promptReserveSeatNum() {
-        System.out.print("How many seats would you like to reserve?  ");
-        userInputResSeats = scanner.nextLine();
-
-        return !validateSeats();
-    }
-
-    private static void quit() {
-        log("You entered Q. Exiting program. Goodbye!");
-        programRunning = false;
         scanner.close();
-    }
-
-    private static void log(String msg) {
-        System.out.println(msg);
+        System.out.println("You entered Q. Exiting program. Goodbye!");
     }
 }
