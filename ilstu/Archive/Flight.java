@@ -21,12 +21,12 @@ public class Flight {
     private int maxNumSeats; // The maximum number of seats available on this flight
     private int numSeatsReserved; // The number of seats currently reserved
 
-    private static final String AC1 = "A350";
-    private static final String AC2 = "767";
-    private static final String AC3 = "ERJ-145";
-    private static final int AC1_CAPACITY = 325;
-    private static final int AC2_CAPACITY = 216;
-    private static final int AC3_CAPACITY = 50;
+    private static final String ac1 = "A350";
+    private static final String ac2 = "767";
+    private static final String ac3 = "ERJ-145";
+    private static final int ac1Capacity = 325;
+    private static final int ac2Capacity = 216;
+    private static final int ac3Capacity = 50;
 
     /**
      * Constructor Method
@@ -102,12 +102,12 @@ public class Flight {
      * @param aircraft
      */
     private void calcMaximumSeats() {
-        if (aircraft.equals(AC1)) {
-            maxNumSeats = AC1_CAPACITY;
-        } else if (aircraft.equals(AC2)) {
-            maxNumSeats = AC2_CAPACITY;
-        } else if (aircraft.equals(AC3)) {
-            maxNumSeats = AC3_CAPACITY;
+        if (aircraft.equals(ac1)) {
+            maxNumSeats = ac1Capacity;
+        } else if (aircraft.equals(ac2)) {
+            maxNumSeats = ac2Capacity;
+        } else if (aircraft.equals(ac3)) {
+            maxNumSeats = ac3Capacity;
         } else {
             maxNumSeats = 0;
         }
